@@ -3,7 +3,7 @@ package selector
 import (
 	"time"
 
-	"github.com/Leon2012/go-micro-lite/libs/go-rcache"
+	"github.com/Leon2012/go-micro-lite/libs/cache"
 	"github.com/Leon2012/go-micro-lite/registry"
 )
 
