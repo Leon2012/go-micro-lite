@@ -9,7 +9,7 @@ import (
 	"github.com/Leon2012/go-micro-lite/client"
 	proto "github.com/Leon2012/go-micro-lite/server/debug/proto"
 	glog "github.com/go-log/log"
-	"github.com/micro/go-log"
+	"github.com/Leon2012/go-micro-lite/libs/go-log"
 )
 
 func testShutdown(wg *sync.WaitGroup, cancel func()) {

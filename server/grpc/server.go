@@ -14,8 +14,8 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"github.com/Leon2012/go-micro-lite/libs/go-log"
 	"github.com/Leon2012/go-micro-lite/server"
-	"github.com/micro/go-log"
 )
 
 var (
