@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/Leon2012/go-micro-lite/broker"
 	"github.com/Leon2012/go-micro-lite/client"
 	cgrpc "github.com/Leon2012/go-micro-lite/client/rpc"
 	"github.com/Leon2012/go-micro-lite/registry"
@@ -14,6 +15,7 @@ import (
 )
 
 type Options struct {
+	Broker   broker.Broker
 	Client   client.Client
 	Server   server.Server
 	Registry registry.Registry
@@ -52,6 +54,12 @@ func newOptions(opts ...Option) Options {
 	}
 
 	return opt
+}
+
+func Broker(b broker.Broker) Option {
+	return func(o *Options) {
+		o.Broker = b
+	}
 }
 
 func Client(c client.Client) Option {

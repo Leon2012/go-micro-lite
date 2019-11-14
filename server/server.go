@@ -3,6 +3,7 @@ package server
 
 import (
 	"context"
+	"time"
 
 	"github.com/Leon2012/go-micro-lite/registry"
 	"github.com/google/uuid"
@@ -84,6 +85,6 @@ type Option func(*Options)
 var (
 	DefaultAddress = ":0"
 	DefaultName    = "server-lite"
-	DefaultVersion = "latest"
+	DefaultVersion = time.Now().Format("2006.01.02.15.04")
 	DefaultId      = uuid.New().String()
 )

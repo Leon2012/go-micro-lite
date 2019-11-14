@@ -2,13 +2,14 @@ package server
 
 import (
 	"context"
-	"time"
-
+	"github.com/Leon2012/go-micro-lite/broker"
 	"github.com/Leon2012/go-micro-lite/registry"
 	"github.com/Leon2012/go-micro-lite/server/debug"
+	"time"
 )
 
 type Options struct {
+	Broker       broker.Broker
 	Registry     registry.Registry
 	Metadata     map[string]string
 	Name         string
@@ -58,6 +59,13 @@ func newOptions(opt ...Option) Options {
 	}
 
 	return opts
+}
+
+// Broker to use for pub/sub
+func Broker(b broker.Broker) Option {
+	return func(o *Options) {
+		o.Broker = b
+	}
 }
 
 // Server name
