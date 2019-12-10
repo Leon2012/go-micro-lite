@@ -3,8 +3,8 @@ package router
 import (
 	mmicro "github.com/Leon2012/go-micro-lite"
 	"github.com/Leon2012/go-micro-lite/api/resolver"
-	"github.com/Leon2012/go-micro-lite/api/resolver/micro"
 	"github.com/Leon2012/go-micro-lite/registry"
+	"github.com/micro/go-micro/api/resolver/micro"
 )
 
 type Options struct {
