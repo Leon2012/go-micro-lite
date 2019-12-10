@@ -14,11 +14,19 @@ import (
 	sgrpc "github.com/Leon2012/go-micro-lite/server/rpc"
 )
 
+var (
+	DefaultSelector = selector.NewSelector()
+	DefaultRegistry = mdns.NewRegistry()
+	DefaultClient   = cgrpc.NewClient()
+	DefaultServer   = sgrpc.NewServer()
+)
+
 type Options struct {
 	Broker   broker.Broker
 	Client   client.Client
 	Server   server.Server
 	Registry registry.Registry
+	Selector selector.Selector
 
 	// Before and After funcs
 	BeforeStart []func() error
@@ -33,26 +41,20 @@ type Options struct {
 
 func newOptions(opts ...Option) Options {
 	opt := Options{
-		Context: context.Background(),
-		Server:  sgrpc.NewServer(),
-		Client:  cgrpc.NewClient(),
+		Context:  context.Background(),
+		Server:   DefaultServer,
+		Client:   DefaultClient,
+		Registry: DefaultRegistry,
+		Selector: DefaultSelector,
 	}
-	r := mdns.NewRegistry()
-	opt.Registry = r
-
-	s := selector.NewSelector()
-	s.Init(selector.Registry(r))
-
-	opt.Client.Init(
-		client.Selector(s),
-		client.Registry(r),
-	)
-	opt.Server.Init(server.Registry(r))
-
+	_ = opt.Selector.Init(selector.Registry(opt.Registry))
+	_ = opt.Client.Init(
+		client.Selector(opt.Selector),
+		client.Registry(opt.Registry))
+	_ = opt.Server.Init(server.Registry(opt.Registry))
 	for _, o := range opts {
 		o(&opt)
 	}
-
 	return opt
 }
 
